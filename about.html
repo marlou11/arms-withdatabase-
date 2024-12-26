@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="icon" href="LOGO.png" type="image/png">
+  <title>Agriculture Registry and Monitoring System</title>
+  <style>
+    /* Resetting some default browser styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body and global styles */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Rubik', sans-serif;
+      color: #213A58; /* Dark text color */
+      line-height: 1.6;
+      background: linear-gradient(to bottom, #0C6478, #09D1C7, #46DFB1); /* Gradient background */
+    }
+
+    /* Navbar styles */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #80EE98; /* Light green for navbar */
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    nav img.icon {
+      height: 40px;
+    }
+
+    nav .logo {
+      font-size: 24px;
+      font-weight: 600;
+      color: #213A58; /* Dark color for logo text */
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: #213A58; /* Dark text for links */
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #09D1C7; /* Highlight color */
+    }
+
+    /* Hero Section with large header */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 100px; /* Adjust for navbar space */
+      padding: 40px 20px;
+      color: #213A58; /* Dark color for text */
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #213A58; /* Dark color for heading */
+      margin-bottom: 20px;
+    }
+
+    .hero img.heading3 {
+      max-width: 60%;
+      margin-bottom: 20px;
+    }
+
+    .first-p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 18px;
+      color: #213A58; /* Dark text for paragraph */
+      line-height: 1.8;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background-color: #fff; /* White background for text box */
+    }
+
+    .first-p a {
+      color: #09D1C7; /* Highlight color for links */
+      text-decoration: underline;
+    }
+
+    .first-p a:hover {
+      color: #fff;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: #213A58; /* Dark background for footer */
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      margin: 10px;
+    }
+
+    .footer-section h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #09D1C7; /* Highlight color for section titles */
+    }
+
+    .footer-section p,
+    .footer-section ul {
+      font-size: 16px;
+    }
+
+    .footer-section p a,
+    .footer-section ul li a {
+      color: #fff; /* White text for links */
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section p a:hover,
+    .footer-section ul li a:hover {
+      color: #09D1C7; /* Highlight color on hover */
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin: 5px 0;
+    }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+        text-align: left;
+      }
+
+      .footer-section {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Front page -->
+  <div class="scroll-control">
+    <section class="home" id="home">
+      <!-- Header/navbar -->
+      <nav>
+        <img class="icon" src="ARMS LOGO.png" alt="Agriculture Registry and Monitoring System">
+        <label class="logo">Agriculture Registry and Monitoring System</label>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="add-distribution.html">Service Distribution</a></li>
+          <li><a href="Signup.html">Sign Up</a></li>
+        </ul>
+      </nav>
+
+      <div class="hero">
+        <h1>Agriculture Registry and Monitoring System</h1>
+  
+        <p class="first-p">
+          The Agriculture Registry and Monitoring System is a digital platform designed to
+          streamline the management and distribution of government support services to corn
+          farmers. The system serves as a centralized registry where farmers can sign up and
+          update their personal, farm, and crop details. It also tracks the delivery of government
+          assistance, including cash subsidies, farm inputs like fertilizers and seeds, farm equipment,
+          and other support services. The system provides an easy and efficient way for corn farmers
+          to register and document their farming activities, tools for monitoring and managing the
+          distribution of resources to farmers, and improves transparency and accuracy in reporting on the
+          assistance provided.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:info@cornfarmersregistry.com">info@cornfarmersregistry.com</a></p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <ul class="socials">
+          <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+          <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+          <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+          <li><a href="https://community.cornfarmersregistry.com" target="_blank">Community</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Feedback</h3>
+        <p>We'd love to hear from you! <a href="feedback.html">Give us your feedback.</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

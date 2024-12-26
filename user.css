@@ -1,0 +1,451 @@
+        /* Basic Layout Styling */
+        body {
+            font-family: 'Rubik', sans-serif;
+            display: flex;
+            min-height: 100vh;
+            background-color: #f0f4f8;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 270px;
+            background-color: #343a40; /* You can change this to a lighter shade or another color */
+            color: white;
+            padding: 35px;
+            padding-top: 60px; /* Adjust this to create space before the text */
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: -270px; /* Sidebar starts hidden */
+            transition: left 0.3s ease;
+            z-index: 100;
+            font-size: 15px;
+            font-weight: 10px;
+        }
+        
+        
+
+        .floating-buttons {
+            position: fixed; /* Ensures the buttons stay fixed on the screen */
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 9999; /* High z-index to bring it to the front */
+            justify-content: space-evenly;
+            align-items: baseline;
+            flex-wrap: wrap;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            padding: 10px; /* Optional, to add space around buttons */
+            border-radius: 8px; /* Optional, to make the background rounded */
+        }
+        
+        
+
+        .floating-buttons button {
+            padding: 15px 25px;
+            background-color: #0cb862;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        
+
+.sidebar h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 60px;
+}
+
+
+.sidebar-toggle i {
+    color: #009688;
+    font-size: 24px;
+}
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    position: relative; /* Needed for positioning the submenu */
+}
+
+.sidebar ul li:hover {
+    background: #0cb862;
+}
+
+.sidebar ul li i {
+    margin-right: 10px;
+}
+
+        /* Show Sidebar When Active */
+        .sidebar.open {
+            left: 0;
+        }
+
+                /* Main Content Styling */
+        .container {
+            background: linear-gradient(to right, #80EE98, #46DFB1, #09D1C7, #0C6478, #213A58);
+            margin-left: 270px;
+            padding: 20px;
+            width: calc(100% - 270px);
+            overflow-y: auto;
+            transition: margin-left 0.3s ease;
+        }
+
+/* Submenu for Barangays */
+#barangayContainer {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+    background-color: #2f353b;
+    position: absolute;
+    top: 100%; /* Position the container below the Farmers item */
+    left: 0;
+    width: 100%; /* Make sure the submenu takes up the full width of the parent item */
+    border-radius: 5px;
+    z-index: 99;
+}
+
+/* Show Barangay submenu when Farmers is clicked */
+#farmersMenu.active #barangayContainer {
+    display: flex;
+}
+
+/* Each Barangay Button */
+.barangay {
+
+    color: white;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover Effects for Each Barangay */
+.barangay:hover {
+    background-color: #0cb862;
+}
+
+/* Main Content Styling */
+.container {
+    background: linear-gradient(to right, #80EE98, #46DFB1, #09D1C7, #0C6478, #213A58);
+    margin-left: 270px;
+    padding: 20px;
+    width: calc(100% - 270px);
+    overflow-y: auto;
+}
+
+h1 {
+
+    color: #ffffff;     
+}
+ /* Sidebar hidden state */
+.sidebar.hidden {
+    transform: translateX(-270px); /* Moves the sidebar off-screen */
+    transition: transform 0.3s ease;
+}
+
+/* Main content adjustment when sidebar is hidden */
+.container.full-width {
+    margin-left: 0;
+    width: 100%;
+    transition: margin-left 0.3s ease;
+}
+
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #EFFDEE;
+    color: #333;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+h1, h2 {    
+    font-weight: normal;
+}
+
+footer {
+    text-align: center;
+}
+
+/* Navigation Bar */
+nav {   
+    background-color: #009688;
+    padding: 0px fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav img.icon {
+    color:#ffffff;  
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+nav .logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+        background-color: #343a40;
+
+}
+
+/* Admin Box */
+.admin-box {
+    background-color: rgb(255, 255, 255);
+    margin: 50px 290px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+}
+
+.admin-box h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.admin-box input {
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 400px;
+    font-size: 16px;    
+}
+
+.admin-box input:focus {
+    border-color: #2f3b52;
+    outline: none;
+}
+
+button {
+    background-color: #343a40;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #343a40;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #343a40;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+table td {
+    background-color:       rgba(255, 255, 255, 0.801);
+}
+
+table td button {
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin-right: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+table td button:hover {
+    background-color: #e9f1e9;
+}
+
+table td button:nth-child(2) {
+    background-color: #f44336;
+}
+
+table td button:nth-child(2):hover {
+    background-color: #e53935;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+/* Sky Green for Pending Users */
+.pending {
+    background-color: #98FF98; 
+    color: #008B8B; /* Sky Blue for text */
+}
+
+/* Approved User Row Style */
+.approved {
+    background-color: #DFFFD6; /* Light green for approved users */
+}
+
+/* Denied User Row Style */
+.denied {
+    background-color: #F44336; /* Red for denied users */
+    color: white; /* White text on red background */
+}
+
+/* Footer */
+.footer3 {
+    background-color: #2f3b52;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer3 .icon2 {
+    width: 40px;
+    height: 40px;
+}
+
+.footer3 .h2-footer {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.footer3 .p-region {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer3 .bigx {
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.footer3 .p-gusty {
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-box {
+        width: 100%;
+        padding: 15px;
+    }
+
+    table th,
+    table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button {
+        padding: 8px 15px;
+    }
+}
+
+/* Sky Green for Pending Users */
+.pending {
+    background-color: #98FF98; /* Light green */
+    color: #008B8B; /* Sky Blue for text */
+}
+
+ /* Sidebar Toggle Button (Burger Icon) */
+ #toggleSidebar {
+    position: fixed;
+    left: 20px;
+    z-index: 101;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white; /* Set the color to white */
+}
+
+.burger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 25px;
+    color: white; /* Set the color to white */
+}
+
+
+.burger-icon span {
+    background-color: #333;
+    height: 5px;
+    width: 100%;
+}
+
+.delete-icon {
+    color: red;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+

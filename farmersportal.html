@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="ARMS LOGO.png" type="image/png">
+        <link rel="stylesheet" href="tepl.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <title>Farmers Portal</title>
+    </head>
+    
+    <style>
+    /* Basic Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+/* Header */
+.header {
+    background-color: #0f98c6;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 2em;
+}
+
+/* Navigation Bar */
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-bar a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.nav-bar a:hover {
+    background-color: #575757;
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+/* Profile and Activity Sections */
+.profile-container, .activity-container, .timeline-container {
+    background-color: #14202d52;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-container:hover, .activity-container:hover, .timeline-container:hover {
+    transform: translateY(-10px);
+}
+
+/* Profile Section */
+.profile-container {
+    flex: 0.3;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: #a0a0a0;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+    transform: scale(1.1);
+}
+
+.profile-details {
+    text-align: center;
+}
+
+.profile-details p {
+    margin: 5px 0;
+}
+
+/* Button Styles */
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+/* Activity Section */
+.activity-container {
+    flex: 0.65;
+    background-color: #14202d52;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.activity-container h2 {
+    margin-bottom: 20px;
+}
+
+.activity-feed {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.activity-item {
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.activity-item:hover {
+    transform: scale(1.05);
+}
+
+.activity-item img {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.activity-item p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.activity-item span {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Timeline Section */
+.timeline-container {
+    flex: 0.65;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.timeline-item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 15px;
+}
+
+.timeline-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.timeline-content {
+    flex-grow: 1;
+}
+
+.timeline-date {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.timeline-content h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.timeline-content p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Edit and Delete Buttons */
+.edit-button {
+    background-color: #ffa500;
+}
+
+.edit-button:hover {
+    background-color: #ff8c00;
+}
+
+.delete-button {
+    background-color: #f44336;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Modal for Full Screen Image */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Edit Activity Modal */
+.edit-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-width: 90%;
+}
+
+.edit-modal input, .edit-modal textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.edit-modal button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.edit-modal button:hover {
+    background-color: #45a049;
+}
+
+.edit-modal .close-edit-modal {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .profile-container {
+        flex: 0.3;
+    }
+
+    .activity-container, .timeline-container {
+        flex: 0.65;
+    }
+
+    .timeline-item {
+        flex-direction: row;
+    }
+
+    .timeline-item img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .timeline-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .timeline-item img {
+        width: 100%;
+        height: auto;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+    <div class="header">
+        Farmers Portal
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <a href="#home">Home</a>
+        <a href="#profile">Profile</a>
+        <a href="activities.html">All Activities</a>
+        <a href="index.html">Logout</a>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <div class="profile-container">
+            <!-- User Profile Section -->
+            <section class="user-profile">
+                <div class="profile-header">
+                    <div class="profile-pic" id="profilePictureDisplay" alt="Profile Picture" onclick="openModal(profilePicture)">👤</div>
+
+                    <h2 id="displayFirstName">Welcome, User!</h2>
+                </div>
+                <div class="profile-details">
+                    <p><strong>First Name:</strong> <span id="firstName"></span></p>
+                    <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+                    <p><strong>RSBA Number:</strong> <span id="rsbaNumber"></span></p>
+                    <p><strong>Barangay:</strong> <span id="barangay"></span></p>
+                    <p><strong>Contact Number:</strong> <span id="contactNumber"></span></p>
+                    <p><strong>Farm Location:</strong> <span id="farmLocation"></span></p>
+                    <p><strong>Farm Size (in hectares):</strong> <span id="farmSize"></span></p>
+                    
+                    <p><strong>Status:</strong> <span id="status"></span></p>
+                </div>
+                <input type="file" id="profilePictureInput" accept="image/*">
+                <button class="button" onclick="uploadProfilePicture()">Upload Profile Picture</button>
+
+            </section>
+        </div>
+
+        <div class="activity-container">
+            <h2>Farmer's Activities</h2>
+
+            <!-- Choose Activity Type Dropdown -->
+            <label for="activityType">Choose Activity Type:</label>
+            <select id="activityType">
+                <option value="Land Preparation">Land Preparation</option>
+                <option value="Seeding">Seeding</option>
+                <option value="Weeding">Weeding</option>
+                <option value="Fertilizing">Fertilizing</option>
+                <option value="Spraying">Spraying</option>
+                <option value="Harvesting">Harvesting</option>
+            </select>
+
+            <input type="file" id="activityImageInput" accept="image/*">
+            <textarea id="activityCaption" placeholder="Write a caption..."></textarea>
+            <button class="button" onclick="addActivity()">Post Activity</button>
+
+
+            <div id="activityFeed" class="activity-feed">
+                <!-- Activities will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Organizer-style Timeline for Photos -->
+        <div class="timeline-container">
+            <h2>Your Activity Timeline</h2>
+            <div id="timeline" class="timeline">
+                <!-- Timeline content will be dynamically added here -->
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Modal for Full Screen Image -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage" />
+    </div>
+
+    <!-- Edit Activity Modal -->
+    <div id="editModal" class="edit-modal">
+        <span class="close-edit-modal" onclick="closeEditModal()">&times;</span>
+        <textarea id="editActivityCaption" placeholder="Edit your caption..."></textarea>
+        <button onclick="saveEdit()">Save Changes</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="./farmersportal.js"></script>
+  
+
+</body>
+
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: <a href="mailto:info@cornfarmersregistry.com">info@cornfarmersregistry.com</a></p>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <ul class="socials">    
+                <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="https://community.cornfarmersregistry.com" target="_blank"><i class="fas fa-users"></i> Community</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Feedback</h3>
+            <p>We'd love to hear from you! <a href="feedback.html">Give us your feedback.</a></p>
+        </div>
+    </div>
+    <h1>Agriculture Registry and Monitoring System</h1>
+    <p class="first-p">The Agriculture Registry and Monitoring System is a digital platform designed to streamline the management and distribution of government support services to corn farmers.</p>
+</footer>
+
+</html>

@@ -1,0 +1,410 @@
+/* Footer Styles */
+footer {
+    background-color:#213A58;
+    padding: 20px 0;
+  }
+
+  header, footer {
+    width: 100%;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: 0;
+}
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px;
+  }
+  
+  .footer-section h3 {
+    font-size: 18px;
+  
+  }
+  
+  .footer-section p, .footer-section ul {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .footer-section a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .footer-section a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-section.about {
+    flex: 2;
+    min-width: 500px;
+    padding: 20px;
+  }
+  
+  .socials {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .socials li {
+    margin: 5px 0;
+  }
+  
+  .socials li a {
+    font-size: 14px;
+    color: #f77b00f9;
+  }
+  
+  .socials li a:hover {
+    color: #007bff;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /* General Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background-color: #f4f7fa;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  h1, h2 {
+    font-weight: bold;
+    
+      color: rgb(255, 255, 255); /* White text */
+      text-shadow: 2px 2px 5px darkgreen; /* Dark green shadow */
+    
+    
+
+  }
+  
+  footer {
+    text-align: center;
+  }
+  
+  /* Navigation Bar */
+  nav {
+    background-color: #2f3b52;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  nav img.icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  nav .logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  nav ul li {
+    display: inline;
+  }
+  
+  nav ul li a {
+    color: white;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  nav ul li a:hover {
+    background-color: #1d2a3a;
+  }
+  
+  /* Admin Box */
+  .admin-box {
+    background-color: white;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+  }
+  
+  .admin-box h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .admin-box input {
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 400px;
+    font-size: 16px;
+  }
+  
+  .admin-box input:focus {
+    border-color: #2f3b52;
+    outline: none;
+  }
+  
+  button {
+    background-color: #2f3b52;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #1d2a3a;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th,
+  table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #2f3b52;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  table td {
+    background-color: white;
+  }
+  
+  table td button {
+    background-color: #4caf50;
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin-right: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  table td button:hover {
+    background-color: #45a049;
+  }
+  
+  table td button:nth-child(2) {
+    background-color: #f44336;
+  }
+  
+  table td button:nth-child(2):hover {
+    background-color: #e53935;
+  }
+  
+  input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 10px;
+  }
+  
+  /* Sky Green for Pending Users */
+  .pending {
+    background-color: #98FF98; 
+    color: #008B8B; /* Sky Blue for text */
+  }
+  
+  /* Approved User Row Style */
+  .approved {
+    background-color: #DFFFD6; /* Light green for approved users */
+  }
+  
+  /* Denied User Row Style */
+  .denied {
+    background-color: #F44336; /* Red for denied users */
+    color: white; /* White text on red background */
+  }
+  
+  /* Footer */
+  .footer3 {
+    background-color: #2f3b52;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .footer3 .icon2 {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .footer3 .h2-footer {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  .footer3 .p-region {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .footer3 .bigx {
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  
+  .footer3 .p-gusty {
+    font-size: 12px;
+    font-style: italic;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .admin-box {
+        width: 100%;
+        padding: 15px;
+    }
+  
+    table th,
+    table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+  
+    button {
+        padding: 8px 15px;
+    }
+  }
+  
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Rubik', sans-serif;
+  
+    color: #c6d2e0; /* Dark text color */
+    line-height: 1.6;
+    background: linear-gradient(to bottom, #0C6478, #09D1C7, #46DFB1); /* Gradient background */
+  }
+  
+
+
+  .footer-section p, .footer-section ul {
+    font-size: 14px;
+    line-height: 1.6;
+    font-size: 15px;
+}
+  
+
+
+.socials {
+  list-style-type: none;
+  padding: 0;
+  display: flex; /* Aligns items in a row */
+  justify-content: center; /* Centers the social media items */
+  gap: 20px; /* Adds space between the icons */
+}
+
+
+
+
+
+
+
+
+
+.socials li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #e67606;  /* Adjust color as needed */
+  font-size: 18px;
+}
+
+.socials li a i {
+  
+  font-size: 20px;    /* Adjust icon size */
+  
+}
+
+.socials li a:hover {
+  color: #007bff;  /* Change color on hover */
+}
+
+.socials li a i:hover {
+  color: #007bff;  /* Optional: Icon hover color */
+}
+
+
+

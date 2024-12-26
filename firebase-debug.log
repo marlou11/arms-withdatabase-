@@ -1,0 +1,18 @@
+[debug] [2024-12-10T12:41:58.328Z] ----------------------------------------------------------------------
+[debug] [2024-12-10T12:41:58.334Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Mec\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login
+[debug] [2024-12-10T12:41:58.335Z] CLI Version:   13.28.0
+[debug] [2024-12-10T12:41:58.335Z] Platform:      win32
+[debug] [2024-12-10T12:41:58.335Z] Node Version:  v22.8.0
+[debug] [2024-12-10T12:41:58.336Z] Time:          Tue Dec 10 2024 20:41:58 GMT+0800 (China Standard Time)
+[debug] [2024-12-10T12:41:58.336Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[info] i  To change your data collection preference at any time, run `firebase logout` and log in again. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=453971701&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2024-12-10T12:42:40.265Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2024-12-10T12:42:40.271Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"aae68b22-19ca-4476-8c69-20b505eb1e93"}

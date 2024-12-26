@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="LOGO1.png" type="image/png">
+    <link rel="stylesheet" href="farmers-record.css">
+    <title>All Activities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+
+</style>
+</head>
+<body>
+
+    <div class="header">
+        All Activities
+    </div>
+
+    <div class="nav-bar">
+        <a href="summaryChart.html" class="nav-link">
+            <i class="fa fa-arrow-left"></i> Back 
+        </a>
+    </div>
+
+    
+
+    
+
+    <!-- Modal for Full Screen Image -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <a class="close" onclick="closeModal()">&times;</a> 
+            <img id="modalImage" alt="Full-screen Activity Image">
+        </div>
+    </div>
+
+   
+
+    <div class="filter-container">
+        <h2>Filter by Barangay</h2>
+        <select id="barangayFilter" class="barangay-filter">
+            <option value="">Select Barangay</option>
+            <option value="Balacanas">Balacanas</option>
+            <option value="Dayawan">Dayawan</option>
+            <option value="Katipunan">Katipunan</option>
+            <option value="Kimaya">Kimaya</option>
+            <option value="Poblacion 1">Poblacion 1</option>
+            <option value="Poblacion 2">Poblacion 2</option>
+            <option value="Poblacion 3">Poblacion 3</option>
+            <option value="San Martin">San Martin</option>
+            <option value="Tambobong">Tambobong</option>
+            <option value="Imelda">Imelda</option>
+            <option value="Looc">Looc</option>
+        </select>
+
+        <label for="timePeriodFilter">Select Time Period:</label>
+        <input type="radio" name="timePeriod" value="monthly" checked> Monthly
+        <input type="radio" name="timePeriod" value="quarterly"> Quarterly
+        <input type="radio" name="timePeriod" value="yearly"> Yearly
+    </div>
+
+    <!-- Summary Box Section for Activity Counts -->
+        <div class="activity-summary">
+        <h3><i class="fas fa-chart-bar"></i> Activity Summary</h3>
+    <div class="activity-summary-boxes">
+        <div class="summary-box">
+            <i class="fas fa-tractor"></i>
+                <h4>Land Preparation</h4>
+            <p id="landPreparationCount">0</p>
+            </div>
+        <div class="summary-box">
+            <i class="fas fa-seedling"></i>
+                <h4>Seeding</h4>
+            <p id="seedingCount">0</p>
+            </div>
+        <div class="summary-box">
+            <i class="fas fa-leaf"></i>
+                <h4>Weeding</h4>
+            <p id="weedingCount">0</p>
+            </div>
+        <div class="summary-box">
+            <i class="fas fa-vial"></i>
+                <h4>Fertilizing</h4>
+            <p id="fertilizingCount">0</p>
+            </div>
+        <div class="summary-box">
+            <i class="fas fa-spray-can"></i>
+                <h4>Spraying</h4>
+            <p id="sprayingCount">0</p>
+            </div>
+        <div class="summary-box">
+            <i class="fas fa-shopping-basket"></i>
+                <h4>Harvesting</h4>
+            <p id="harvestingCount">0</p>
+        </div>
+    </div>
+    </div>
+
+<!-- Activity Section -->
+<div class="activity-container">
+    <h2><i class="fas fa-stream"></i> Your Activity Feed</h2>
+    <div id="activityFeed" class="activity-feed">
+        <!-- Activities will be displayed here -->
+    </div>
+    </div>
+
+<div id="container">
+    <h1><i class="fas fa-file-alt"></i> Farmer Activity Summary Report</h1>
+    <div id="reportContainer">
+        <!-- The report will be dynamically inserted here -->
+    </div>
+</div>
+
+
+
+
+<script>
+    let activityToApprove = null;
+
+    const allowedBarangays = [
+    "Balacanas", "Dayawan", "Katipunan", "Kimaya", "Poblacion 1", 
+    "Poblacion 2", "Poblacion 3", "San Martin", "Tambobong", "Imelda", "Looc"
+];
+
+    // Retrieve the logged-in user from localStorage
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const latestUser = users.length > 0 ? users[users.length - 1] : null;
+  
+    if (latestUser) {
+    // Load and display activities for the barangay
+    displayActivities(latestUser.barangay);
+}
+
+const barangayFilter = document.getElementById('barangayFilter');
+if (!barangayFilter) {
+    console.error('barangayFilter element not found');
+}
+
+
+// Main function to display activities for a selected barangay and timeframe
+function displayActivities(barangay, activityType = '', timePeriod = 'monthly') {
+        const activitiesByBarangay = JSON.parse(localStorage.getItem(`activitiesByBarangay-${barangay}`)) || {};
+    const activityFeed = document.getElementById('activityFeed');
+    const activitySummary = {
+        'Land Preparation': 0,
+        'Seeding': 0,
+        'Weeding': 0,
+        'Fertilizing': 0,
+        'Spraying': 0,
+        'Harvesting': 0
+    };
+
+    activityFeed.innerHTML = ""; // Clear existing activities
+
+    // Filter and display activities by the selected activity type, barangay, and time period
+    Object.keys(activitiesByBarangay).forEach(activityTypeKey => {
+        if (!activityType || activityTypeKey === activityType) {
+            activitiesByBarangay[activityTypeKey].forEach((activity, index) => {
+                if (!barangay || activity.barangay === barangay) {
+                    // Filter activities by time period
+                    if (isActivityWithinTimePeriod(activity.timestamp, timePeriod)) {
+                            const activityItem = `
+                            <div class="activity-item ${activity.approved ? 'approved' : ''}" id="activity-${activity.userId}-${index}">
+                                <h3>${activity.userName} - ${activity.activityType}</h3>
+                                <img src="${activity.image}" alt="Activity Image" onclick="openModal('${activity.image}')">
+                                <p><strong>RSBA Number:</strong> ${activity.rsbaNumber}</p>
+                                <p><strong>Barangay:</strong> ${activity.barangay}</p>
+                                <p><strong>Caption:</strong> ${activity.caption}</p>
+                                <span>${activity.timestamp}</span>
+                                <div>
+                                   
+                                
+                                </div>
+                            </div>
+                            `;
+                        activityFeed.innerHTML += activityItem;
+
+                        // Increment the count for the activity type
+                        if (activitySummary[activity.activityType] !== undefined) {
+                            activitySummary[activity.activityType]++;
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+    // Update the summary boxes
+    updateSummaryBoxes(activitySummary, timePeriod);
+}
+
+// Open full-screen image modal
+function openModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        modal.style.display = "flex";
+        modalImage.src = imageSrc;
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = "none";
+    }
+
+
+
+
+// Utility for localStorage interaction
+function getStorage(key) {
+    try {
+        return JSON.parse(localStorage.getItem(key)) || {};
+    } catch (error) {
+            console.error(`Error parsing ${key}:`, error);
+        return {};
+    }
+}
+
+
+function setStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+const barangayFilter = document.getElementById('barangayFilter');
+
+if (!barangayFilter) {
+    console.error('barangayFilter element not found');
+    return; // Prevent further errors
+}
+
+// Add a single change event listener
+barangayFilter.addEventListener('change', function () {
+    const selectedBarangay = this.value;
+    displayActivities(selectedBarangay); // Re-display activities based on selected barangay
+});
+});
+
+
+
+// Time period utility
+function isActivityWithinTimePeriod(timestamp, timePeriod) {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Month is 0-indexed, so add 1
+
+    // Determine the current time period range
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+
+    switch (timePeriod) {
+        case 'monthly':
+            return month === currentMonth && year === currentYear;
+        case 'quarterly':
+            const quarter = Math.floor((month - 1) / 3) + 1;
+            const currentQuarter = Math.floor((currentMonth - 1) / 3) + 1;
+            return year === currentYear && quarter === currentQuarter;
+        case 'yearly':
+            return year === currentYear;
+        default:
+            return false;
+    }
+}
+
+
+function updateSummaryBoxes(activitySummary, timePeriod) {
+const landPreparationCount = document.getElementById('landPreparationCount');
+if (landPreparationCount) landPreparationCount.textContent = activitySummary['Land Preparation'] || 0;
+
+const seedingCount = document.getElementById('seedingCount');
+if (seedingCount) seedingCount.textContent = activitySummary['Seeding'] || 0;
+
+const weedingCount = document.getElementById('weedingCount');
+if (weedingCount) weedingCount.textContent = activitySummary['Weeding'] || 0;
+
+const fertilizingCount = document.getElementById('fertilizingCount');
+if (fertilizingCount) fertilizingCount.textContent = activitySummary['Fertilizing'] || 0;
+
+const sprayingCount = document.getElementById('sprayingCount');
+if (sprayingCount) sprayingCount.textContent = activitySummary['Spraying'] || 0;
+
+const harvestingCount = document.getElementById('harvestingCount');
+if (harvestingCount) harvestingCount.textContent = activitySummary['Harvesting'] || 0;
+
+// Display the selected time period label
+const periodLabel = document.getElementById('timePeriodLabel');
+    if (periodLabel) periodLabel.textContent = `Showing ${timePeriod} report`;
+}
+
+// Event Listener for Barangay Filter
+document.getElementById('barangayFilter').addEventListener('change', function() {
+    const selectedBarangay = this.value;
+    const selectedTimePeriod = document.querySelector('input[name="timePeriod"]:checked').value;
+    displayActivities(selectedBarangay, '', selectedTimePeriod);  // Re-display activities based on selected barangay and time period
+});
+
+// Handle Activity Actions (Delete, Archive, Favorite)
+function handleActivityAction(action, userId, index, activityType) {
+    const activitiesByBarangay = JSON.parse(localStorage.getItem(`activitiesByBarangay-${latestUser.barangay}`)) || {};
+    const activityItem = document.getElementById(`activity-${userId}-${index}`);
+
+    if (activitiesByBarangay[activityType] && activitiesByBarangay[activityType][index]) {
+        const activity = activitiesByBarangay[activityType].splice(index, 1)[0]; // Remove activity
+        localStorage.setItem(`activitiesByBarangay-${latestUser.barangay}`, JSON.stringify(activitiesByBarangay));
+
+        // Perform action based on the type (delete, archive, favorite)
+        switch(action) {
+            case 'delete':
+                activityItem.remove();
+                break;
+            case 'archive':
+                const archivedActivities = JSON.parse(localStorage.getItem(`archivedActivities-${latestUser.barangay}`)) || [];
+                archivedActivities.push(activity);
+                localStorage.setItem(`archivedActivities-${latestUser.barangay}`, JSON.stringify(archivedActivities));
+                activityItem.remove();
+                break;
+            case 'favorite':
+                const favorites = JSON.parse(localStorage.getItem(`favorites-${latestUser.barangay}`)) || [];
+                const existingIndex = favorites.findIndex(fav => fav.userId === activity.userId && fav.index === index);
+
+                if (existingIndex > -1) {
+                    favorites.splice(existingIndex, 1); // Remove from favorites
+                } else {
+                    favorites.push({ userId: activity.userId, index, activityType });
+                }
+                localStorage.setItem(`favorites-${latestUser.barangay}`, JSON.stringify(favorites));
+
+                // Update star color
+                const starButton = activityItem.querySelector('.fa-star');
+                if (starButton) {
+                    starButton.style.color = existingIndex > -1 ? '' : 'gold';
+                }
+                break;
+        }
+    }
+}
+
+
+
+    // Handle Delete Action
+    function deleteActivity(userId, index, activityType) {
+            const activitiesByBarangay = JSON.parse(localStorage.getItem(`activitiesByBarangay-${latestUser.barangay}`)) || {};
+
+        if (activitiesByBarangay[activityType] && activitiesByBarangay[activityType][index]) {
+            // Remove the activity from the list
+            activitiesByBarangay[activityType].splice(index, 1);
+                localStorage.setItem(`activitiesByBarangay-${latestUser.barangay}`, JSON.stringify(activitiesByBarangay));
+
+            // Remove the activity item from the DOM
+                const activityItem = document.getElementById(`activity-${userId}-${index}`);
+            activityItem.remove();
+        }
+    }
+
+    function archiveActivity(userId, index, activityType) {
+            const activitiesByBarangay = JSON.parse(localStorage.getItem(`activitiesByBarangay-${latestUser.barangay}`)) || {};
+            const archivedActivities = JSON.parse(localStorage.getItem(`archivedActivities-${latestUser.barangay}`)) || [];
+
+        if (activitiesByBarangay[activityType] && activitiesByBarangay[activityType][index]) {
+            const activity = activitiesByBarangay[activityType].splice(index, 1)[0]; // Get and remove activity
+            archivedActivities.push(activity); // Add to archived list
+                localStorage.setItem(`activitiesByBarangay-${latestUser.barangay}`, JSON.stringify(activitiesByBarangay));
+                localStorage.setItem(`archivedActivities-${latestUser.barangay}`, JSON.stringify(archivedActivities));
+
+                const activityItem = document.getElementById(`activity-${userId}-${index}`);
+            activityItem.remove();
+        }
+    }
+
+    // Updated favoriteActivity function
+    function favoriteActivity(userId, index, activityType) {
+            const activitiesByBarangay = getStorage(`activitiesByBarangay-${latestUser.barangay}`);
+            const favorites = getStorage(`favorites-${latestUser.barangay}`);
+
+        if (activitiesByBarangay[activityType] && activitiesByBarangay[activityType][index]) {
+            const activity = activitiesByBarangay[activityType][index];
+            const existingIndex = favorites.findIndex(fav => fav.userId === activity.userId && fav.index === index);
+
+            if (existingIndex > -1) {
+                favorites.splice(existingIndex, 1); // Remove if already a favorite
+            } else {
+                favorites.push({ userId: activity.userId, index, activityType });
+            }
+
+                setStorage(`favorites-${latestUser.barangay}`, favorites);
+
+                const starButton = document.querySelector(`#activity-${userId}-${index} .fa-star`);
+            if (starButton) {
+                starButton.style.color = existingIndex > -1 ? '' : 'gold';
+            }
+        }
+    }
+
+    // Event Listener for Barangay Filter
+document.getElementById('barangayFilter').addEventListener('change', function() {
+    const selectedBarangay = this.value;
+    displayActivities(selectedBarangay);  // Re-display activities based on selected barangay
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+document.getElementById('barangayFilter').addEventListener('change', function() {
+    const selectedBarangay = this.value;
+    displayActivities(selectedBarangay); // Re-display activities based on selected barangay
+});
+});
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+const barangayFilter = document.getElementById('barangayFilter');
+if (!barangayFilter) {
+    console.error('barangayFilter element not found');
+    return; // Prevent further errors
+}
+
+barangayFilter.addEventListener('change', function() {
+    const selectedBarangay = this.value;
+    displayActivities(selectedBarangay); // Re-display activities based on selected barangay
+});
+});
+
+function generateSummaryReport() {
+    const barangays = [
+        "Balacanas", "Dayawan", "Katipunan", "Kimaya", "Poblacion 1", 
+        "Poblacion 2", "Poblacion 3", "San Martin", "Tambobong", "Imelda", "Looc"
+    ];
+
+    const activityTypes = ['Land Preparation', 'Seeding', 'Weeding', 'Fertilizing', 'Spraying', 'Harvesting'];
+    const report = {};
+    const totalSummary = {
+        'Land Preparation': 0,
+        'Seeding': 0,
+        'Weeding': 0,
+        'Fertilizing': 0,
+        'Spraying': 0,
+        'Harvesting': 0
+    };
+
+    barangays.forEach(barangay => {
+        const activitiesByBarangay = JSON.parse(localStorage.getItem(`activitiesByBarangay-${barangay}`)) || {};
+        const activitySummary = activityTypes.reduce((summary, type) => {
+            summary[type] = activitiesByBarangay[type]?.length || 0;
+            return summary;
+        }, {});
+
+        // Generate report for each barangay with activities count > 0
+        let barangayReport = `<h3>Activity Report for ${barangay}</h3>`;
+        let hasActivity = false;
+
+        activityTypes.forEach(activity => {
+            const count = activitySummary[activity];
+            if (count > 0) {
+                let activityText = '';
+                
+                // Handle grammar for "Land Preparation" activity
+                if (activity === 'Land Preparation') {
+                    activityText = count === 1 
+                        ? `<p><strong>Land Preparation:</strong> 1 farmer is currently preparing the land.</p>`
+                        : `<p><strong>Preparing land:</strong> ${count} farmers are currently preparing the land.</p>`;
+                } else {
+                    // For other activities, continue with the original structure
+                    const farmerWord = count === 1 ? "farmer" : "farmers";
+                    const verb = count === 1 ? "is" : "are";
+                    activityText = `<p><strong>${activity}:</strong> ${count} ${farmerWord} ${verb} currently ${activity.toLowerCase()}.</p>`;
+                }
+
+                // Add the activity text to the report
+                barangayReport += activityText;
+                hasActivity = true;
+
+                // Update the total summary count
+                totalSummary[activity] += count;
+            }
+        });
+
+        // Only include report if there's any activity
+        if (hasActivity) {
+            barangayReport += `<hr />`;
+            report[barangay] = barangayReport;
+        }
+    });
+
+    // Combine and display final report
+    let finalReport = "<h2>Comprehensive Activity Summary</h2>";
+    Object.values(report).forEach(barangayReport => {
+        finalReport += barangayReport;
+    });
+
+    // Add summary report
+    finalReport += "<h3>Overall Activity Summary</h3>";
+    finalReport += "<ul>";
+    activityTypes.forEach(activity => {
+        finalReport += `<li><strong>${activity}:</strong> ${totalSummary[activity]} total activities across all barangays.</li>`;
+    });
+    finalReport += "</ul>";
+
+    // Save the generated report to localStorage
+    localStorage.setItem('activitySummaryReport', finalReport);
+
+    // Display the report on the page
+    const reportContainer = document.getElementById('reportContainer');
+    if (reportContainer) {
+        reportContainer.innerHTML = finalReport;
+    }
+}
+
+// Call the function to generate and save the report when needed
+generateSummaryReport();
+
+
+</script>  
+    
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="ARMS LOGO.png" type="image/png">
+    <title>Corn Registry and Monitoring System</title>
+    <link href="respo.css" rel="stylesheet">
+    
+    <style>
+        /* General styling for the form */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #80EE98, #46DFB1, #09D1C7, #0C6478, #213A58);
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+            display: flex;
+            flex-direction: column;  /* Stack the navbar and registration box */
+        }
+
+
+        /* Navbar styling */
+        nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            width: 100%;  /* Ensure navbar spans full width */
+            z-index: 1000; /* To make sure navbar stays on top */
+        }
+
+        nav img.icon {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        nav .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            margin-left: auto;
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Registration Box Styling */
+        .registration-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 12px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            top: 80px;  /* Ensure registration box is below the navbar */
+            margin-left: auto; /* Align to the center horizontally */
+            margin-right: auto; /* Align to the center horizontally */
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+/* Password container styling */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    padding-right: 35px; /* Space for the icon */
+    width: 100%; /* Make sure the input field takes full width */
+}
+
+/* Password Toggle Icon */
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+    font-size: 1.2rem;
+}
+
+.toggle-password:hover {
+    color: #333;
+}
+
+/* Form Container Styling */
+
+
+/* Heading Styles */
+h1 {
+    margin-bottom: 15px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+h4 {
+    margin-bottom: 30px;
+    font-size: 18px;
+    color: #777;
+    font-weight: 400;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group input,
+.form-group select {
+    padding: 10px;
+}
+
+/* Responsive Inputs */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%; /* Ensure input fields fill available space */
+    max-width: 100%; /* Allow inputs to expand to container's width */
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #46DFB1;
+
+}
+/* Button Styling */
+button[type="button"],
+        button[type="submit"] {
+            background-color: #46DFB1;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button[type="button"]:hover,
+        button[type="submit"]:hover {
+            background-color: #09D1C7;
+            transform: translateY(-2px);
+        }
+
+        
+    
+
+        /* Next button styling */
+        .next-btn {
+            background-color: #09D1C7;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .next-btn:hover {
+            background-color: #46DFB1;
+        }
+
+        /* Form page hiding and showing */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Prompt message */
+        .prompt {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+
+/* Add some space for terms and conditions */
+p {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 25px;
+    color: #555;
+}
+
+p a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .registration-box {
+        width: 100%;
+        padding: 20px;
+        max-width: 500px;
+    }
+
+    button[type="submit"],
+    .btnn {
+        width: 100%;
+    }
+
+
+/* Add some spacing around the form */
+section.registration {
+    margin-top: 80px;  /* Push the registration form below the navbar */
+    display: flex;
+    justify-content: center;  /* Align form to center horizontally */
+    align-items: flex-start;  /* Align form at the top of the screen */
+    flex-direction: column;
+    height: calc(100vh - 80px);  /* Make sure the form doesn't overlap with the navbar */
+    padding-bottom: 20px;
+}
+}
+    </style>
+</head>
+
+<body>
+
+    <section class="registration">
+        <nav>
+            <img class="icon" src="ARMS LOGO.png" alt="Logo">
+            <label class="logo">Corn Registry System</label>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+
+        <div class="registration-box">
+            <h1>Farmer Registration</h1>
+            <h4>Join our Corn Registry Program!</h4>
+            <form action="" id="registrationForm">
+                <div class="page active" id="page1">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" placeholder="Enter your first name" required />
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="middleInitial">Middle Initial</label>
+                        <input type="text" id="middleInitial" placeholder="Enter your middle initial" maxlength="1" />
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" placeholder="Enter your last name" required />
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="rsbaNumber">RSBA Number</label>
+                        <input type="text" id="rsbaNumber" placeholder="Enter your RSBA Number" required />
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="text" id="contactNumber" placeholder="Enter your contact number" required />
+                    </div>
+    
+                    <button type="button" class="next-btn" onclick="goToNextPage(2)">Next</button>
+                </div>
+    
+
+                <!-- Page 2: Address and Farm Details -->
+            <div class="page" id="page2">
+                <div class="form-group address-container">
+                    <label for="barangay">Barangay</label>
+                    <select id="barangay" required>
+                        <option value="">Select Barangay</option>
+                        <option value="Balacanas">Balacanas</option>
+                        <option value="Dayawan">Dayawan</option>
+                        <option value="Katipunan">Katipunan</option>
+                        <option value="Kimaya">Kimaya</option>
+                        <option value="Poblacion 1">Poblacion 1</option>
+                        <option value="Poblacion 2">Poblacion 2</option>
+                        <option value="Poblacion 3">Poblacion 3</option>
+                        <option value="San Martin">San Martin</option>
+                        <option value="Tambobong">Tambobong</option>
+                        <option value="Imelda">Imelda</option>
+                        <option value="Barangay Looc">Barangay Looc</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="homeAddress">Complete Home Address</label>
+                    <input type="text" id="homeAddress" placeholder="Enter your complete home address (e.g., street, block, house number)" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="farmSize">Farm Size (in hectares)</label>
+                    <input type="number" id="farmSize" placeholder="Enter farm size" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="farmLocation">Farm Location</label>
+                    <input type="text" id="farmLocation" placeholder="Enter your farm location (e.g., town, area)" required />
+                </div>
+
+                <button type="button" class="next-btn" onclick="goToNextPage(3)">Next</button>
+            </div>
+
+                <!-- Page 3: Set Password -->
+            <div class="page" id="page3">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
+                </div>
+
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+
+
+    </div>
+
+            <p>
+                By clicking the Submit button, you agree to our <br />
+                <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>
+            </p>
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="./register.js"></script>
+
+</body>
+
+</html>

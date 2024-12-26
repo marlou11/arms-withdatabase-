@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="ARMS LOGO.png" type="image/png">
+    <title>Admin - User Management</title>
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .modal-content button {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #ddd;
+        }
+
+
+        /* Success Message Styles */
+        .success-message {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            border-radius: 5px;
+        }
+
+        .sidebar-toggle i {
+            color: #009688;
+            font-size: 24px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <section class="admin">
+        <nav>
+            <img class="icon" src="ARMS LOGO.png" alt="Logo">
+            <label class="logo">Corn Registry System</label>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="admin.html">Back to Admin Dashboard</a></li>
+            </ul>
+        </nav>
+
+                <!-- Toggle Button (Burger Icon) -->
+ 
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+
+        <div class="sidebar" id="sidebar">
+
+            <!-- Sidebar Toggle Icon -->
+        <div id="toggleSidebar" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+            <ul id="menuList">
+                <li id="dashboardMenu" onclick="window.location.href='dashboard.html'">
+                    <i class="fas fa-tachometer-alt"></i>Dashboard </li>
+                    <li id="farmersMenu"onclick="window.location.href='admin.html'">Farmers</li>
+                    <li id="distribution-records" onclick="window.location.href='add-distribution.html'">Distribution Records</li>
+                    <li id="farmersActivitiesMenu" onclick="window.location.href='farmers-record.html'">Farmers Activities</li>
+                    <li id="userManagementMenu" onclick="window.location.href='user.html'">User Management</li>
+                    <li id="logoutMenu" onclick="window.location.href='index.html'">Logout</li>
+            </ul>
+        </div>
+
+       
+        <div class="admin-box">
+            <h1>User Management</h1>
+            <input type="text" id="searchInput" placeholder="Search users..." onkeyup="searchUsers()" />
+
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll" onclick="selectAllUsers()" /></th>
+                        <th><button onclick="sortTable('name')">Name</button></th>
+                        <th><button onclick="sortTable('rsbaNumber')">RSBA Number</button></th>
+                        <th><button onclick="sortTable('farmLocation')">Farm Location</button></th>
+                        <th><button onclick="sortTable('farmSize')">Farm Size</button></th>
+                        <th><button onclick="sortTable('barangay')">Barangay</button></th>
+                        <th><button onclick="sortTable('contactNumber')">Contact Number</button></th>
+                        <th><button onclick="sortTable('status')">Status</button></th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+            <!-- Floating Buttons -->
+            <div class="floating-buttons">
+                <button onclick="approveSelected()">Approve</button>
+                <button onclick="denyUser()">Deny</button>
+            </div>
+            </section>
+
+    <!-- Modal for Denial Confirmation -->
+    <div id="denyModal" class="modal">
+        <div class="modal-content">
+            <h2>Are you sure you want to deny this user?</h2>
+            <button id="confirmDenyBtn" onclick="denyConfirmed()">Deny</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="./user.js"></script>
+</body>
+
+</html>
